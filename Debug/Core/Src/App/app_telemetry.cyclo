@@ -1,0 +1,9 @@
+../Core/Src/App/app_telemetry.c:3:17:AppTelemetry_AppendChar	2
+../Core/Src/App/app_telemetry.c:13:17:AppTelemetry_AppendText	4
+../Core/Src/App/app_telemetry.c:36:17:AppTelemetry_AppendUInt	5
+../Core/Src/App/app_telemetry.c:62:17:AppTelemetry_AppendInt	3
+../Core/Src/App/app_telemetry.c:86:6:AppTelemetry_Init	2
+../Core/Src/App/app_telemetry.c:96:19:AppTelemetry_PrintBoot	3
+../Core/Src/App/app_telemetry.c:134:19:AppTelemetry_PrintMode	3
+../Core/Src/App/app_telemetry.c:153:19:AppTelemetry_PrintAdc	3
+../Core/Src/App/app_telemetry.c:188:19:AppTelemetry_PrintFrame	5

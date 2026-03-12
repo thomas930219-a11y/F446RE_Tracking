@@ -1,0 +1,3 @@
+../Core/Src/tracking_app.c:19:13:TrackingApp_LogAdcError	2
+../Core/Src/tracking_app.c:36:6:TrackingApp_Init	4
+../Core/Src/tracking_app.c:56:6:TrackingApp_Task	5

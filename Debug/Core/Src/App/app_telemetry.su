@@ -1,0 +1,9 @@
+../Core/Src/App/app_telemetry.c:3:17:AppTelemetry_AppendChar	24	static
+../Core/Src/App/app_telemetry.c:13:17:AppTelemetry_AppendText	32	static
+../Core/Src/App/app_telemetry.c:36:17:AppTelemetry_AppendUInt	40	static
+../Core/Src/App/app_telemetry.c:62:17:AppTelemetry_AppendInt	32	static
+../Core/Src/App/app_telemetry.c:86:6:AppTelemetry_Init	16	static
+../Core/Src/App/app_telemetry.c:96:19:AppTelemetry_PrintBoot	24	static
+../Core/Src/App/app_telemetry.c:134:19:AppTelemetry_PrintMode	24	static
+../Core/Src/App/app_telemetry.c:153:19:AppTelemetry_PrintAdc	32	static
+../Core/Src/App/app_telemetry.c:188:19:AppTelemetry_PrintFrame	24	static

@@ -1,0 +1,2 @@
+../Core/Src/App/app_filter.c:7:6:AppFilterLpf_Init	16	static
+../Core/Src/App/app_filter.c:19:10:AppFilterLpf_Update	32	static

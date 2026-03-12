@@ -1,0 +1,5 @@
+../Core/Src/App/app_tmc2209.c:11:16:AppTmc2209_Crc	4
+../Core/Src/App/app_tmc2209.c:35:6:AppTmc2209_Init	2
+../Core/Src/App/app_tmc2209.c:48:19:AppTmc2209_WriteReg	3
+../Core/Src/App/app_tmc2209.c:70:19:AppTmc2209_ApplyBasicConfig	2
+../Core/Src/App/app_tmc2209.c:83:19:AppTmc2209_GetLastStatus	2

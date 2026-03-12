@@ -1,0 +1,2 @@
+../Core/Src/App/app_adc.c:3:19:AppAdcChannel_Init	32	static
+../Core/Src/App/app_adc.c:28:19:AppAdcChannel_Read	24	static

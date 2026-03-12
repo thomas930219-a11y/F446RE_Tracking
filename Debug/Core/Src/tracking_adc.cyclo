@@ -1,0 +1,4 @@
+../Core/Src/tracking_adc.c:5:17:TrackingAdc_ToMillivolt	1
+../Core/Src/tracking_adc.c:10:19:TrackingAdcChannel_Init	4
+../Core/Src/tracking_adc.c:29:19:TrackingAdcChannel_Update	6
+../Core/Src/tracking_adc.c:73:21:TrackingAdcChannel_GetSample	2

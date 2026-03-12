@@ -1,0 +1,2 @@
+../Core/Src/App/app_adc_dma.c:3:19:AppAdcDma_Init	32	static
+../Core/Src/App/app_adc_dma.c:26:19:AppAdcDma_Read	32	static

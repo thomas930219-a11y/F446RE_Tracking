@@ -1,0 +1,3 @@
+../Core/Src/tracking_log.c:9:6:TrackingLog_Init	16	static
+../Core/Src/tracking_log.c:19:19:TrackingLog_PrintText	24	static
+../Core/Src/tracking_log.c:42:19:TrackingLog_PrintSample	288	static

@@ -1,0 +1,4 @@
+../Core/Src/App/uart_sequence.c:3:17:UartSequence_AppendText	2
+../Core/Src/App/uart_sequence.c:18:17:UartSequence_AppendU32	5
+../Core/Src/App/uart_sequence.c:44:6:UartSequence_Init	3
+../Core/Src/App/uart_sequence.c:60:6:UartSequence_Task	5

@@ -1,0 +1,12 @@
+../Core/Src/App/stepper_tmc2209.c:11:16:StepperTmc2209_Crc8	24	static
+../Core/Src/App/stepper_tmc2209.c:39:16:StepperTmc2209_IsApb2Timer	16	static
+../Core/Src/App/stepper_tmc2209.c:51:17:StepperTmc2209_GetTimerClock	16	static
+../Core/Src/App/stepper_tmc2209.c:71:26:StepperTmc2209_WriteRegister	32	static
+../Core/Src/App/stepper_tmc2209.c:90:26:StepperTmc2209_ConfigDefaultRegisters	24	static
+../Core/Src/App/stepper_tmc2209.c:122:26:StepperTmc2209_ApplyStepFrequency	32	static
+../Core/Src/App/stepper_tmc2209.c:164:19:StepperTmc2209_Init	32	static
+../Core/Src/App/stepper_tmc2209.c:231:19:StepperTmc2209_SetSpeedStage	24	static
+../Core/Src/App/stepper_tmc2209.c:260:19:StepperTmc2209_NextSpeedStage	24	static
+../Core/Src/App/stepper_tmc2209.c:279:6:StepperTmc2209_SetDirection	16	static
+../Core/Src/App/stepper_tmc2209.c:291:6:StepperTmc2209_SetEnable	16	static
+../Core/Src/App/stepper_tmc2209.c:303:9:StepperTmc2209_GetSpeedStage	16	static

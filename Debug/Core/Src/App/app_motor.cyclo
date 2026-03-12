@@ -1,0 +1,6 @@
+../Core/Src/App/app_motor.c:3:13:AppMotor_WriteEnable	4
+../Core/Src/App/app_motor.c:17:19:AppMotor_Init	9
+../Core/Src/App/app_motor.c:49:6:AppMotor_SetDirectionFromError	3
+../Core/Src/App/app_motor.c:60:6:AppMotor_SetStepHz	13
+../Core/Src/App/app_motor.c:94:6:AppMotor_Stop	1
+../Core/Src/App/app_motor.c:99:9:AppMotor_GetEncoderCount	3

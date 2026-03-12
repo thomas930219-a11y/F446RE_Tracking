@@ -1,0 +1,2 @@
+../Core/Src/App/app_adc.c:3:19:AppAdcChannel_Init	4
+../Core/Src/App/app_adc.c:28:19:AppAdcChannel_Read	5

@@ -1,0 +1,3 @@
+../Core/Src/App/app_uart.c:3:6:AppUart_Init	2
+../Core/Src/App/app_uart.c:14:19:AppUart_Send	5
+../Core/Src/App/app_uart.c:24:19:AppUart_SendText	5

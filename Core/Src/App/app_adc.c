@@ -38,6 +38,23 @@ static void AppAdc_UpdateFilter(
   }
 }
 
+static HAL_StatusTypeDef AppAdc_ValidateDmaConfig(
+    const ADC_HandleTypeDef *hadc,
+    uint32_t sample_count)
+{
+  if ((hadc == NULL) ||
+      (sample_count == 0U) ||
+      (hadc->Init.ScanConvMode == DISABLE) ||
+      (hadc->Init.ContinuousConvMode == DISABLE) ||
+      (hadc->Init.DMAContinuousRequests == DISABLE) ||
+      (hadc->Init.NbrOfConversion != sample_count))
+  {
+    return HAL_ERROR;
+  }
+
+  return HAL_OK;
+}
+
 static HAL_StatusTypeDef AppAdc_StartDmaChannel(
     ADC_HandleTypeDef *hadc,
     volatile uint16_t *dma_target,
@@ -46,6 +63,11 @@ static HAL_StatusTypeDef AppAdc_StartDmaChannel(
   HAL_StatusTypeDef status;
 
   if ((hadc == NULL) || (dma_target == NULL) || (sample_count == 0U))
+  {
+    return HAL_ERROR;
+  }
+
+  if (AppAdc_ValidateDmaConfig(hadc, sample_count) != HAL_OK)
   {
     return HAL_ERROR;
   }

@@ -22,6 +22,17 @@
 #define TMC2209_RAMP_STEP_HZ 800U
 #define TMC2209_RAMP_DELAY_MS 1U
 #define TMC2209_DIR_SWITCH_SETTLE_MS 2U
+#define TMC2209_GCONF_PDN_DISABLE (1UL << 6U)
+#define TMC2209_GCONF_MSTEP_REG_SELECT (1UL << 7U)
+#define TMC2209_GCONF_VALUE (TMC2209_GCONF_PDN_DISABLE | TMC2209_GCONF_MSTEP_REG_SELECT)
+#define TMC2209_CHOPCONF_BASE_VALUE 0x10000053UL
+#define TMC2209_CHOPCONF_MRES_SHIFT 24U
+#define TMC2209_CHOPCONF_MRES_MASK (0x0FUL << TMC2209_CHOPCONF_MRES_SHIFT)
+#define TMC2209_CHOPCONF_MRES_1_16 0x04UL
+#define TMC2209_CHOPCONF_VALUE \
+  ((TMC2209_CHOPCONF_BASE_VALUE & ~TMC2209_CHOPCONF_MRES_MASK) | \
+   (TMC2209_CHOPCONF_MRES_1_16 << TMC2209_CHOPCONF_MRES_SHIFT))
+#define TMC2209_PWMCONF_VALUE 0xC10D0024UL
 #define TMC2209_IHOLD_IRUN_VALUE \
   ((((uint32_t)TMC2209_IHOLDDELAY) << 16U) | (((uint32_t)TMC2209_IRUN) << 8U) | ((uint32_t)TMC2209_IHOLD))
 
@@ -109,7 +120,7 @@ static HAL_StatusTypeDef StepperTmc2209_ConfigDefaultRegisters(
 {
   HAL_StatusTypeDef status;
 
-  status = StepperTmc2209_WriteRegister(handle, TMC2209_REG_GCONF, 0x00000040U);
+  status = StepperTmc2209_WriteRegister(handle, TMC2209_REG_GCONF, TMC2209_GCONF_VALUE);
   if (status != HAL_OK)
   {
     return status;
@@ -125,7 +136,7 @@ static HAL_StatusTypeDef StepperTmc2209_ConfigDefaultRegisters(
 
   HAL_Delay(TMC2209_REG_WRITE_DELAY_MS);
 
-  status = StepperTmc2209_WriteRegister(handle, TMC2209_REG_CHOPCONF, 0x10000053U);
+  status = StepperTmc2209_WriteRegister(handle, TMC2209_REG_CHOPCONF, TMC2209_CHOPCONF_VALUE);
   if (status != HAL_OK)
   {
     return status;
@@ -133,7 +144,7 @@ static HAL_StatusTypeDef StepperTmc2209_ConfigDefaultRegisters(
 
   HAL_Delay(TMC2209_REG_WRITE_DELAY_MS);
 
-  return StepperTmc2209_WriteRegister(handle, TMC2209_REG_PWMCONF, 0xC10D0024U);
+  return StepperTmc2209_WriteRegister(handle, TMC2209_REG_PWMCONF, TMC2209_PWMCONF_VALUE);
 }
 
 static HAL_StatusTypeDef StepperTmc2209_ApplyStepFrequency(

@@ -1,6 +1,6 @@
 # F446RE_TRACKING HackMD（Pin / 功能 / 封包 / PWM / ADC）
 
-> 更新日期: 2026-03-15  
+> 更新日期: 2026-03-21  
 > MCU: STM32F446RE  
 
 ## 1. 專案在做什麼（先講白話）
@@ -23,15 +23,15 @@
 | Motor1 | DIR | `PC6` | GPIO | Out | Motor1 方向控制 |
 | Motor1 | EN | `PB8` | GPIO | Out | Motor1 enable，active-low |
 | Motor1 | TMC UART TX | `PC10` | `UART4_TX` | Out | TMC2209 #1 設定封包 |
-| Motor1 | TMC UART RX | `PC11` | `UART4_RX` | In | TMC2209 #1 回讀 |
+| Motor1 | TMC UART RX | `PC11` | `UART4_RX` | In | TMC2209 #1 RX，專案目前未使用回讀 |
 | Motor1 | Encoder A/B | `PA15` / `PB9` | `TIM2_CH1/CH2` | In | Motor1 編碼器（Encoder mode） |
 | Motor2 | STEP | `PA6` | `TIM3_CH1` | Out | 脈波輸出到 TMC2209 #2 STEP |
 | Motor2 | DIR | `PC8` | GPIO | Out | Motor2 方向控制 |
 | Motor2 | EN | `PC9` | GPIO | Out | Motor2 enable，active-low |
 | Motor2 | TMC UART TX | `PC12` | `UART5_TX` | Out | TMC2209 #2 設定封包 |
-| Motor2 | TMC UART RX | `PD2` | `UART5_RX` | In | TMC2209 #2 回讀 |
+| Motor2 | TMC UART RX | `PD2` | `UART5_RX` | In | TMC2209 #2 RX，專案目前未使用回讀 |
 | Motor2 | Encoder A/B | `PA0` / `PA1` | `TIM5_CH1/CH2` | In | Motor2 編碼器（Encoder mode） |
-| User I/F | 模式按鍵 | `PC13` | `B1 / EXTI13` | In | 切換 4 種模式 |
+| User I/F | 模式按鍵 | `PC13` | `B1 / EXTI13` | In | 切換 8 個 stage（4 段速度 x 正反轉） |
 | ADC | ADC1 輸入 1 | `PC3` | `ADC1_IN13` | In | 類比通道 `adc1` |
 | ADC | ADC2 輸入 1 | `PC4` | `ADC2_IN14` | In | 類比通道 `adc2` |
 | ADC | ADC1 輸入 2 | `PC2` | `ADC1_IN12` | In | 類比通道 `adc3` |
@@ -140,6 +140,35 @@
 - 實際頻率 = `1,000,000 / 714 = 1400.56 Hz`
 
 白話：1400Hz 因為除不盡，會有非常小的量化誤差，這是正常現象。
+
+### 4.6 目前 TMC2209 細分設定
+
+這份專案現在不是把細分交給模組板硬體腳位，而是由 [`Core/Src/App/stepper_tmc2209.c`](c:\Users\a2105\STM32CubeIDE\workspace_1.14.1\F446RE_TRACKING\Core\Src\App\stepper_tmc2209.c) 的 UART 寄存器設定直接指定：
+
+- `GCONF = 0x000000C0`
+- `CHOPCONF = 0x14000053`
+
+這代表：
+
+- 開 `pdn_disable`
+- 開 `mstep_reg_select`
+- `MRES = 1/16 microstep`
+
+因此若馬達是常見的 `200 full-step/rev`，目前實際就是：
+
+```text
+1 圈 = 200 x 16 = 3200 STEP pulse
+```
+
+也就是：
+
+- `200 Hz` = `16 秒 / 圈`
+- `3200 Hz` = `1 秒 / 圈`
+
+如果你實測仍接近 `1600 pulse/rev`，那就要優先檢查：
+
+- UART 寄存器設定有沒有真的寫進 TMC2209
+- 模組板 `PDN_UART / MS1 / MS2` 的硬體接法有沒有影響細分來源
 
 ---
 
@@ -283,6 +312,7 @@ voltage = adc_raw * 3.3 / 4095
 | Stage 1/5 | step | `1400 Hz` |
 | Stage 2/6 | step | `5000 Hz` |
 | Stage 3/7 | step | `7500 Hz` |
+| TMC2209 microstep | mode | `1/16` |
 | ADC mode | acquisition | `HAL_ADC_Start_DMA(...,2)` x2 |
 | DMA mode | stream | `CIRCULAR` |
 | DMA IRQ | HT/TC | `Disabled in AppAdc` |
